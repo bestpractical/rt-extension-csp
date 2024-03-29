@@ -8,5 +8,5 @@ if ( length $csp_directive ) {
     $r->headers_out->{'Content-Security-Policy'} = "$csp_directive";
 }
 
-$r->headers_out->{'Content-Security-Policy-Report-Only'} = "default-src 'none'; report-uri $report_uri; report-to $report_uri";
+$r->headers_out->{'Content-Security-Policy-Report-Only'} = "$csp_report_directive report-uri $report_uri; report-to $report_uri";
 </%init>
