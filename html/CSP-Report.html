@@ -1,0 +1,18 @@
+<p>Nothing to see here.</p>
+<%init>
+use Data::Printer;
+use JSON;
+
+my $csp_report;
+eval { $csp_report = JSON::decode_json($ARGS{POSTDATA}) };
+
+if ( $@ ) {
+    RT->Logger->error("Unable to parse JSON: $@ " . $ARGS{POSTDATA});
+}
+else {
+    RT->Logger->debug("CSP Report:\n" . p($csp_report));
+}
+
+</%init>
+<%args>
+</%args>

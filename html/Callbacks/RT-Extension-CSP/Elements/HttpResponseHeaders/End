@@ -1,0 +1,12 @@
+<%init>
+
+my $report_uri = RT->Config->Get('CSPReportURI') || '/NoAuth/CSP-Report.html';
+my $csp_directive = RT->Config->Get('CSPDirective') if RT->Config->Get('CSPDirective');
+my $csp_report_directive = $csp_directive || RT->Config->Get('CSPReportDirective') || "default-src 'none';";
+
+if ( length $csp_directive ) {
+    $r->headers_out->{'Content-Security-Policy'} = "$csp_directive";
+}
+
+$r->headers_out->{'Content-Security-Policy-Report-Only'} = "default-src 'none'; report-uri $report_uri; report-to $report_uri";
+</%init>
